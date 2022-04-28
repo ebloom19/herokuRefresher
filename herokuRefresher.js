@@ -12,11 +12,13 @@ async function reload(refreshCounter) {
         headless: true,
         chromiumSandbox: false 
     }
+
+    const url = process.argv.slice(2)[0]
     
     const browser = await chromium.launch(launchOptions);
     console.log('Opening Browser')
     const page = await browser.newPage();
-    await page.goto('http://ethan-bloom.herokuapp.com/');
+    await page.goto(url);
     console.log('Loaded Page')
     await page.waitForTimeout(2000); // wait for 2 seconds
     await page.close();
@@ -34,6 +36,6 @@ let run = async ()=>{
     reload();
 }
 
-setInterval(run, 600000);
+setInterval(run, 60000);
 
 
